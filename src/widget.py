@@ -1,12 +1,11 @@
-from os.path import split
-
-from masks import get_mask_card_number
-from masks import get_mask_account
+from masks import get_mask_account, get_mask_card_number
 
 operation_data = "2024-03-11T02:26:18.671407"
-type_and_number = "Visa Platinum 7000792289606361"
+type_and_number_for_card = "Visa Platinum 7000792289606361"
+type_and_number_for_account = "Счет 73654108430135874305"
 
-def mask_account_card (type_and_number: str) -> str:
+
+def mask_account_card(type_and_number: str) -> str:
     """Функция, которая возвращает строку с названием карты или счет и маскирует номер карты или счета"""
     list_with_data = type_and_number.split()
     text_with_data = []
@@ -29,5 +28,6 @@ def get_date(operation_data: str) -> str:
     return f"{operation_data[8:10]}.{operation_data[5:7]}.{operation_data[0:4]}"
 
 
-print (get_date(operation_data))
-print (mask_account_card(type_and_number))
+print(get_date(operation_data))
+print(mask_account_card(type_and_number_for_card))
+print(mask_account_card(type_and_number_for_account))
