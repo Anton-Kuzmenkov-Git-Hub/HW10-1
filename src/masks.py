@@ -1,5 +1,5 @@
-card_number = "7000792289606361"
-account_number = "73654108430135874305"
+#card_number = "7000792289606361"
+#account_number = "73654108430135874305"
 
 
 def get_mask_card_number(card_number: str) -> str:
