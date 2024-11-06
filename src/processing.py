@@ -8,9 +8,7 @@ example = [
 ]
 
 
-def filter_by_state(
-    example: list[dict[str, Any]], user_state: str = "EXECUTED"
-) -> list[dict[str, Any]]:
+def filter_by_state(example: list[dict[str, Any]], user_state: str = "EXECUTED") -> list[dict[str, Any]]:
     """Функция, которая возвращает новый список словарей, в соответсвии с заданным параметром state"""
     new_dictionary = []
     for i in example:
@@ -22,9 +20,7 @@ def filter_by_state(
 # print(filter_by_state(example, user_state="EXECUTED"))
 
 
-def sort_by_date(
-    example: list[dict[str, Any]], order: bool = True
-) -> list[dict[str, Any]]:
+def sort_by_date(example: list[dict[str, Any]], order: bool = True) -> list[dict[str, Any]]:
     """Функция, которая возвращает новый список отсортированный по дате"""
     example_sorted_by_date = sorted(example, key=lambda x: x["date"], reverse=order)
     return example_sorted_by_date
