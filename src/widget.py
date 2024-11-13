@@ -28,6 +28,6 @@ def get_date(operation_data: str) -> str:
     return f"{operation_data[8:10]}.{operation_data[5:7]}.{operation_data[0:4]}"
 
 
-print(get_date(operation_data))
-print(mask_account_card(type_and_number_for_card))
-print(mask_account_card(type_and_number_for_account))
+# print(get_date(operation_data))
+# print(mask_account_card(type_and_number_for_card))
+# print(mask_account_card(type_and_number_for_account))
