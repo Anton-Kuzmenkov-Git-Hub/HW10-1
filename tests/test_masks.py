@@ -20,6 +20,7 @@ def test_assert_get_mask_card_number():
     assert get_mask_card_number(7000792289606361) == '7000 79** **** 6361'
     assert get_mask_card_number('0123 45 678 9101112') == '0123 45** **** 1112'
     assert get_mask_card_number('0123 ab cd 9101112') == 'Введите правильно 16-ти значный номер карты'
+    assert get_mask_card_number() == 'Ошибка ввода данных'
 
 
 def test_get_mask_account():
@@ -30,3 +31,4 @@ def test_get_mask_account():
     assert get_mask_account('1111222233334444555566667777') == 'Введите правильно 20-ти значный номер счета'
     assert get_mask_account('adcd') == 'Введите правильно 20-ти значный номер счета'
     assert get_mask_account('1111 2222 3333 4444 5555') == '**5555'
+    assert get_mask_account() == 'Ошибка ввода данных'
