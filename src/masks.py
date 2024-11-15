@@ -1,7 +1,5 @@
-# card_number = '7000792289606361'
-# card_number = 'abcde792289406361'
-# account_number = "7365 4108 4301 3587 4305"
 from itertools import count
+
 
 
 def get_mask_card_number(card_number='0000000000000000') -> str:
@@ -24,7 +22,7 @@ def get_mask_card_number(card_number='0000000000000000') -> str:
 
 
 
-#print(get_mask_card_number())
+#print(get_mask_card_number('Visa Platinum 7000792289606361'))
 
 
 def get_mask_account(account_number='00000000000000000000') -> str:

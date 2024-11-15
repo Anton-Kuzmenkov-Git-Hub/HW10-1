@@ -1,4 +1,4 @@
-from src.masks import get_mask_account, get_mask_card_number
+from masks import get_mask_account, get_mask_card_number
 
 operation_data = "2024-03-11T02:26:18.671407"
 type_and_number_for_card = "Visa Platinum 7000792289606361"
@@ -13,7 +13,6 @@ def mask_account_card(type_and_number: str) -> str:
         if word_or_number.isalpha():
             text_with_data.append(word_or_number)
         if word_or_number.isdigit():
-            print (word_or_number)
             if len(word_or_number) <= 16:
                 add_mask_to_card = get_mask_card_number(word_or_number)
                 text_with_data.append(add_mask_to_card)
@@ -26,6 +25,7 @@ def mask_account_card(type_and_number: str) -> str:
 
 def get_date(operation_data: str) -> str:
     """Функция, которая преобразует входные данные о дате транзакции"""
+
     return f"{operation_data[8:10]}.{operation_data[5:7]}.{operation_data[0:4]}"
 
 
