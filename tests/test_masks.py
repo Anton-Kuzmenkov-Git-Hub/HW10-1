@@ -23,6 +23,14 @@ def test_assert_get_mask_card_number():
     assert get_mask_card_number() == 'Ошибка ввода данных'
 
 
+@pytest.mark.parametrize('value, expected', [
+    ("70007922896063610012", "**0012"),
+    ("11112222333344445555", "**5555"),
+    ("01234567890123451234", "**1234"),
+])
+def test_mark_get_mask_card_number(value, expected):
+    assert get_mask_account(value) == expected
+
 def test_get_mask_account():
     assert get_mask_account('73654108430135874305') == '**4305'
     assert get_mask_account(73654108430135874305) == 'Неверный формат ввода'

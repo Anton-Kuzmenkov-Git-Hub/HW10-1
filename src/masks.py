@@ -2,7 +2,7 @@ from itertools import count
 
 
 
-def get_mask_card_number(card_number='0000000000000000') -> str:
+def get_mask_card_number(card_number: str = '0000000000000000') -> str:
     """Функция, которая маскирует номер карты"""
     card_num = str(card_number)
     count_digits = 0
@@ -22,10 +22,10 @@ def get_mask_card_number(card_number='0000000000000000') -> str:
 
 
 
-#print(get_mask_card_number('Visa Platinum 7000792289606361'))
+# print(get_mask_card_number())
 
 
-def get_mask_account(account_number='00000000000000000000') -> str:
+def get_mask_account(account_number: str ='00000000000000000000') -> str:
     """Функция, которая маскирует номер счета"""
     if isinstance(account_number, str):
         count_digits = 0

@@ -30,5 +30,5 @@ def get_date(operation_data: str) -> str:
 
 
 # print(get_date(operation_data))
-print(mask_account_card(type_and_number_for_card))
+#print(mask_account_card(type_and_number_for_card))
 # print(mask_account_card(type_and_number_for_account))
