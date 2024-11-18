@@ -8,16 +8,21 @@ example = [
 ]
 
 
-def filter_by_state(example: list[dict[str, Any]], user_state: str = "EXECUTED") -> list[dict[str, Any]]:
+
+def filter_by_state(example: list[dict[str, Any]] = [], user_state: str = "EXECUTED") -> list[dict[str, Any]]:
     """Функция, которая возвращает новый список словарей, в соответсвии с заданным параметром state"""
-    new_dictionary = []
-    for i in example:
-        if i["state"] == user_state:
-            new_dictionary.append(i)
-    return new_dictionary
+    if isinstance(example, list):
+        new_dictionary = []
+        for i in example:
+            if i["state"] == user_state:
+                new_dictionary.append(i)
+        if new_dictionary == []:
+            return 'Данные с указанным статусом отсутсвуют'
+        return new_dictionary
+    return 'Неверный тип данных'
 
 
-# print(filter_by_state(example, user_state="EXECUTED"))
+print(filter_by_state(example, user_state="EXECUTED"))
 
 
 def sort_by_date(example: list[dict[str, Any]], order: bool = True) -> list[dict[str, Any]]:

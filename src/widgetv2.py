@@ -32,12 +32,8 @@ def mask_account_card(type_and_number: str = 'Card_or_account 0000000000000000')
                     add_mask_to_account = get_mask_account(num)
                     text_with_digit.append(add_mask_to_account)
                 if len(num) != 16 and len(num) != 20:
-                    add_mask_to_account = 'Не удается определить номер карты или счета'
-                    text_with_digit.append(add_mask_to_account)
                     raise MyClassError('Некорректный ввод номера карты или счета')
         all_data = " ".join(text_with_alpha) + ' ' + " ".join(text_with_digit)
-        if 'Несуществующая карта или счет' in all_data:
-            return 'Некорректный ввод названия карты или счета'
         if 'Счет' in text_with_alpha and len(text_with_digit[0]) == 6:
             return all_data
         if set(text_with_alpha).issubset(acceptable_card_names) and len(text_with_digit[0]) == 19:
@@ -65,5 +61,5 @@ def get_date(operation_data: str = '1000-12-30T23:59:59.456789') -> date:
         return 'Неверный формат даты'
 
 
-print (get_date('2024-12-30T23:59:59.456789'))
+# print (get_date('2024-12-30T23:59:59.456789'))
 
