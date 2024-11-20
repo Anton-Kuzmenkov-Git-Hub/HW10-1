@@ -22,7 +22,7 @@ def filter_by_state(example: list[dict[str, Any]] = [], user_state: str = "EXECU
     return 'Неверный тип данных'
 
 
-print(filter_by_state(example, user_state="EXECUTED"))
+# print(filter_by_state(example))
 
 
 def sort_by_date(example: list[dict[str, Any]], order: bool = True) -> list[dict[str, Any]]:
@@ -30,5 +30,4 @@ def sort_by_date(example: list[dict[str, Any]], order: bool = True) -> list[dict
     example_sorted_by_date = sorted(example, key=lambda x: x["date"], reverse=order)
     return example_sorted_by_date
 
-
-# print(sort_by_date(example, order=True))
+print(sort_by_date(example, order=True))
