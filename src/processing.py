@@ -1,4 +1,7 @@
 from typing import Any
+import datetime
+
+from src.widgetv2 import get_date
 
 example = [
     {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
@@ -7,6 +10,12 @@ example = [
     {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
 
+example_2 = [
+    {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},
+    {'id': 594226727, 'state': 'CANCELED', 'date': '2018-10-14T21:27:25.241689'},
+    {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-10-14T02:08:58.425572'},
+    {'id': 41428829, 'state': 'EXECUTED', 'date': '2018-10-14T18:35:29.512364'},
+]
 
 
 def filter_by_state(example: list[dict[str, Any]] = [], user_state: str = "EXECUTED") -> list[dict[str, Any]]:
@@ -25,9 +34,28 @@ def filter_by_state(example: list[dict[str, Any]] = [], user_state: str = "EXECU
 # print(filter_by_state(example))
 
 
-def sort_by_date(example: list[dict[str, Any]], order: bool = True) -> list[dict[str, Any]]:
-    """Функция, которая возвращает новый список отсортированный по дате"""
-    example_sorted_by_date = sorted(example, key=lambda x: x["date"], reverse=order)
-    return example_sorted_by_date
 
-print(sort_by_date(example, order=True))
+def sort_by_date(example: list[dict[str, Any]]= [], order: bool = True) -> list[dict[str, Any]]:
+    """Функция, которая возвращает новый список отсортированный по дате"""
+    try:
+        if isinstance(example, list):
+            if example == []:
+                return 'Используйте список по образцу [{"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"}]'
+            new_dict = []
+            if example != []:
+                if order != True and order != False:
+                    return 'Задайте порядок сортировки'
+                for i in example:
+                    evry_data = (i['date'])
+                    slice_data = evry_data[8:10] + '.' + evry_data[5:7] + '.' + evry_data[0:4]
+                    convert_data = (datetime.datetime.strptime(i['date'], '%Y-%m-%dT%H:%M:%S.%f'))
+                    slice_convert_data = convert_data.strftime('%d.%m.%Y')
+                    if slice_data == slice_convert_data:
+                        new_dict.append(i)
+            sort_new_dict = sorted(new_dict, key=lambda x: x["date"], reverse=order)
+            return sort_new_dict
+        return 'Неверный тип данных'
+    except ValueError:
+        return 'Неверный формат даты'
+
+#print(sort_by_date(example, order=False))
