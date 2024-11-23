@@ -1,12 +1,15 @@
 import pytest
 
+
 @pytest.fixture
 def short_data_other():
     return [{"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"}]
 
+
 @pytest.fixture
 def short_data_canceled():
     return [{"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"}]
+
 
 @pytest.fixture
 def example_data():
@@ -17,6 +20,7 @@ def example_data():
     {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
 ]
 
+
 @pytest.fixture
 def answer():
     return [
@@ -25,6 +29,7 @@ def answer():
     {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
     {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}
 ]
+
 
 @pytest.fixture
 def answer_rev_falls():
@@ -35,6 +40,7 @@ def answer_rev_falls():
     {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'}
 ]
 
+
 @pytest.fixture
 def same_data():
     return [
@@ -44,6 +50,7 @@ def same_data():
     {'id': 41428829, 'state': 'EXECUTED', 'date': '2018-10-14T18:35:29.512364'},
 ]
 
+
 @pytest.fixture
 def same_data_answer():
     return [
@@ -52,6 +59,7 @@ def same_data_answer():
     {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'},
     {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-10-14T02:08:58.425572'}
 ]
+
 
 @pytest.fixture
 def data_error():

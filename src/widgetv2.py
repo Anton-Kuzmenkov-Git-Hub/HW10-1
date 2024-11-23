@@ -1,18 +1,17 @@
-from datetime import date
 import datetime
+from datetime import date
 
 from src.masks import get_mask_account, get_mask_card_number
 
+acceptable_names = ['Maestro', 'MasterCard', 'Visa Classic', 'Visa Platinum', 'Visa Gold', 'Счет']
+acceptable_card_names = ['Maestro', 'MasterCard', 'Visa Classic', 'Visa Platinum', 'Visa Gold']
 
-acceptable_names = ['Maestro', 'MasterCard', 'Visa Classic',
-                    'Visa Platinum', 'Visa Gold', 'Счет']
-acceptable_card_names = ['Maestro', 'MasterCard', 'Visa Classic',
-                    'Visa Platinum', 'Visa Gold']
 
 class MyClassError(Exception):
     pass
 
-def mask_account_card(type_and_number: str = 'Card_or_account 0000000000000000') -> str:
+
+def mask_account_card(type_and_number: str = 'Card_or_account 0000000000000000') -> str | MyClassError:
     """Функция, которая возвращает строку с названием карты
     или счет и маскирует номер карты или счета"""
     list_with_data = type_and_number.split()
@@ -44,12 +43,10 @@ def mask_account_card(type_and_number: str = 'Card_or_account 0000000000000000')
         return mce
 
 
-#print (mask_account_card())
+# print (mask_account_card())
 
 
-
-
-def get_date(operation_data: str = '1000-12-30T23:59:59.456789') -> date:
+def get_date(operation_data: str = '1000-12-30T23:59:59.456789') -> date | str:
     """Функция, которая преобразует входные данные о дате транзакции"""
     try:
         date_time_obj = datetime.datetime.strptime(operation_data, '%Y-%m-%dT%H:%M:%S.%f')
@@ -62,4 +59,3 @@ def get_date(operation_data: str = '1000-12-30T23:59:59.456789') -> date:
 
 
 # print (get_date('2024-12-30T23:59:59.456789'))
-
