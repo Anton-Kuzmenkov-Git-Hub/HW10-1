@@ -25,7 +25,7 @@ def filter_by_state(example_dict: list[dict[str, Any]] = [],
             if i["state"] == user_state:
                 new_dictionary.append(i)
         if not new_dictionary:
-            return 'Данные с указанным статусом отсутсвуют'
+            return 'Данные с указанным статусом отсутствуют'
         return new_dictionary
     return 'Неверный тип данных'
 # print(filter_by_state(example))

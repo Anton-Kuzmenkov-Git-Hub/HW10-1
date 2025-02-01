@@ -1,5 +1,4 @@
-from random import random
-from typing import AnyStr, Generator
+from typing import Generator
 
 transactions = (
     [
@@ -81,42 +80,65 @@ transactions = (
     ]
 )
 
-def filter_by_currency(transaction: list[dict[any, any]], currency: str = None):
-    for i in transaction:
-        if i["operationAmount"]["currency"]["code"] == currency:
-            yield i
-
-usd_transactions = filter_by_currency(transactions, 'USD')
-try:
-    for a in range(10):
-        print(next(usd_transactions))
-except StopIteration:
-    print('Больше нет данных по валюте USD.')
-
-rub_transactions = filter_by_currency(transactions, 'RUB')
-try:
-    for a in range(10):
-        print(next(rub_transactions))
-except StopIteration:
-    print('Больше нет данных по валюте RUB.')
+def filter_by_currency(transaction: list[dict[str, any]] = [], currency: str = '') -> Generator[str,None,None] or str:
+    """Функция принимает на вход список словарей, представляющих транзакции,
+    и возвращает итератор, который поочередно выдает транзакции по заданной валюте"""
+    if isinstance(transaction, list) and isinstance(currency, str):
+        if transaction == []:
+            return 'Список транзакций пуст'
+        if currency == '':
+            return 'Впишите в currency валюту USD или RUB.'
+        if currency != 'USD' and currency != 'RUB':
+            return 'Выберите в качестве валюты USD или RUB.'
+        for t in transaction:
+            if t["operationAmount"]["currency"]["code"] == currency:
+                yield t
+    return 'Неверный формат данных'
 
 
 
-def transaction_descriptions (transaction: list[dict[any, any]]):
-    for i in transaction:
-        yield i["description"]
+# f = filter_by_currency(transactions,currency='RB')
+# while True:
+#     try:
+#         a = next(f)
+#         print(a)
+#     except StopIteration:
+#         print ('Больше нет данных по выбранной валюте')
+#         break
 
-descriptions = transaction_descriptions(transactions)
-try:
-    for i in range(10):
-        print(next(descriptions))
-except StopIteration:
-    print('Больше нет операция по картам или счетам.')
+# usd_transactions = filter_by_currency(transactions, 'USD')
+# try:
+#     for a in range(10):
+#         print(next(usd_transactions))
+# except StopIteration:
+#     print('Больше нет данных по валюте USD.')
+#
+# rub_transactions = filter_by_currency(transactions, 'RUB')
+# try:
+#     for a in range(10):
+#         print(next(rub_transactions))
+# except StopIteration:
+#     print('Больше нет данных по валюте RUB.')
+
+
+
+def transaction_descriptions (transaction: list[dict[str, any]]) -> Generator[str,None,None]:
+    """Функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
+    for d in transaction:
+        yield d["description"]
+
+# descriptions = transaction_descriptions(transactions)
+# try:
+#     for i in range(10):
+#         print(next(descriptions))
+# except StopIteration:
+#     print('Больше нет операция по картам или счетам.')
 
 
 
 
-def card_number_generator(start: int, end:int) -> str:
+def card_number_generator(start: int, end:int) -> Generator[str,None,None]:
+    """Функция, которая может сгенерировать номера карт в заданном диапазоне"""
     real_end = end + 1
     for num in range(start,real_end, +1):
         card_number_for_gen = str(num)
@@ -125,5 +147,5 @@ def card_number_generator(start: int, end:int) -> str:
         result_card_number = f'{card_number_for_gen[:4]} {card_number_for_gen[4:9]} {card_number_for_gen[9:13]} {card_number_for_gen[12:]}'
         yield result_card_number
 
-for card_number in card_number_generator(1,5):
-    print (card_number)
+# for card_number in card_number_generator(1,5):
+#     print (card_number)
