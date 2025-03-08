@@ -83,21 +83,35 @@ transactions = (
 def filter_by_currency(transaction: list[dict[str, any]] = [], currency: str = '') -> Generator[str,None,None] or str:
     """Функция принимает на вход список словарей, представляющих транзакции,
     и возвращает итератор, который поочередно выдает транзакции по заданной валюте"""
-    if isinstance(transaction, list) and isinstance(currency, str):
-        if transaction == []:
-            return 'Список транзакций пуст'
-        if currency == '':
-            return 'Впишите в currency валюту USD или RUB.'
-        if currency != 'USD' and currency != 'RUB':
-            return 'Выберите в качестве валюты USD или RUB.'
-        for t in transaction:
-            if t["operationAmount"]["currency"]["code"] == currency:
-                yield t
-    return 'Неверный формат данных'
+    if not isinstance(currency, str):
+        raise StopIteration('Неверный формат')
+    if transaction == []:
+        raise StopIteration('Список транзакций пуст')
+        # return 'Список транзакций пуст'
+    if currency == '':
+        raise StopIteration('Впишите в currency валюту USD или RUB.')
+        # return 'Впишите в currency валюту USD или RUB.'
+    if currency != 'USD' and currency != 'RUB':
+        raise TypeError('Выберите в качестве валюты USD или RUB.')
+        # return 'Выберите в качестве валюты USD или RUB.'
+    for t in transaction:
+        if t["operationAmount"]["currency"]["code"] == currency:
+            yield t
 
 
+# def catch_stopiteration(gen):
+#     try:
+#         yield from gen
+#     except StopIteration:
+#         print('поймали')
 
-# f = filter_by_currency(transactions,currency='RB')
+# r = catch_stopiteration(filter_by_currency(transactions,'USD'))
+# print(next(r))
+# print(next(r))
+# print(next(r))
+# print(next(r))
+
+# f = filter_by_currency(transactions,currency='RUB')
 # while True:
 #     try:
 #         a = next(f)
@@ -127,12 +141,12 @@ def transaction_descriptions (transaction: list[dict[str, any]]) -> Generator[st
     for d in transaction:
         yield d["description"]
 
-# descriptions = transaction_descriptions(transactions)
-# try:
-#     for i in range(10):
-#         print(next(descriptions))
-# except StopIteration:
-#     print('Больше нет операция по картам или счетам.')
+descriptions = transaction_descriptions(transactions)
+try:
+    for i in range(10):
+        print(next(descriptions))
+except StopIteration:
+    print('Больше нет операция по картам или счетам.')
 
 
 
