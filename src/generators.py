@@ -141,25 +141,25 @@ def transaction_descriptions (transaction: list[dict[str, any]]) -> Generator[st
     for d in transaction:
         yield d["description"]
 
-descriptions = transaction_descriptions(transactions)
-try:
-    for i in range(10):
-        print(next(descriptions))
-except StopIteration:
-    print('Больше нет операция по картам или счетам.')
+# descriptions = transaction_descriptions(transactions)
+# try:
+#     for i in range(10):
+#         print(next(descriptions))
+# except StopIteration:
+#     print('Больше нет операция по картам или счетам.')
 
 
 
 
-def card_number_generator(start: int, end:int) -> Generator[str,None,None]:
+def card_number_generator(start: int, end: int) -> Generator[str,None,None]:
     """Функция, которая может сгенерировать номера карт в заданном диапазоне"""
     real_end = end + 1
     for num in range(start,real_end, +1):
         card_number_for_gen = str(num)
         while len(card_number_for_gen) < 16:
             card_number_for_gen = '0' + card_number_for_gen
-        result_card_number = f'{card_number_for_gen[:4]} {card_number_for_gen[4:9]} {card_number_for_gen[9:13]} {card_number_for_gen[12:]}'
+        result_card_number = f'{card_number_for_gen[:4]} {card_number_for_gen[4:8]} {card_number_for_gen[9:13]} {card_number_for_gen[12:]}'
         yield result_card_number
 
-# for card_number in card_number_generator(1,5):
-#     print (card_number)
+for card_number in card_number_generator(1,5):
+    print (card_number)
