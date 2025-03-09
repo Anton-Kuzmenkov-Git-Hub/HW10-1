@@ -80,7 +80,9 @@ transactions = (
     ]
 )
 
-def filter_by_currency(transaction: list[dict[str, any]] = [], currency: str = '') -> Generator[str,None,None] or str:
+
+def filter_by_currency(transaction: list[dict[str, any]] = [], currency: str = '') \
+        -> Generator[str, None, None] or str:
     """Функция принимает на вход список словарей, представляющих транзакции,
     и возвращает итератор, который поочередно выдает транзакции по заданной валюте"""
     if not isinstance(currency, str):
@@ -135,8 +137,7 @@ def filter_by_currency(transaction: list[dict[str, any]] = [], currency: str = '
 #     print('Больше нет данных по валюте RUB.')
 
 
-
-def transaction_descriptions (transaction: list[dict[str, any]]) -> Generator[str,None,None]:
+def transaction_descriptions(transaction: list[dict[str, any]]) -> Generator[str, None, None]:
     """Функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
     for d in transaction:
         yield d["description"]
@@ -149,17 +150,16 @@ def transaction_descriptions (transaction: list[dict[str, any]]) -> Generator[st
 #     print('Больше нет операция по картам или счетам.')
 
 
-
-
-def card_number_generator(start: int, end: int) -> Generator[str,None,None]:
+def card_number_generator(start: int, end: int) -> Generator[str, None, None]:
     """Функция, которая может сгенерировать номера карт в заданном диапазоне"""
     real_end = end + 1
-    for num in range(start,real_end, +1):
+    for num in range(start, real_end, +1):
         card_number_for_gen = str(num)
         while len(card_number_for_gen) < 16:
             card_number_for_gen = '0' + card_number_for_gen
-        result_card_number = f'{card_number_for_gen[:4]} {card_number_for_gen[4:8]} {card_number_for_gen[9:13]} {card_number_for_gen[12:]}'
+        result_card_number = (f'{card_number_for_gen[:4]} {card_number_for_gen[4:8]} '
+                              f'{card_number_for_gen[9:13]} {card_number_for_gen[12:]}')
         yield result_card_number
 
-for card_number in card_number_generator(1,5):
-    print (card_number)
+# for card_number in card_number_generator(1,5):
+#     print (card_number)

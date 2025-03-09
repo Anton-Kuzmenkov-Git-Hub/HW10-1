@@ -1,6 +1,7 @@
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator, transactions
+from src.generators import (card_number_generator, filter_by_currency,
+                            transaction_descriptions, transactions)
 
 
 def test_assert_filter_by_currency(usd_1, usd_2, usd_3, rub_1, rub_2):
